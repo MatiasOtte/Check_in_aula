@@ -30,9 +30,10 @@ public class CheckInGUI extends JFrame {
     }
 
     private void initComponents() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 2, 10, 10));
-
+        JPanel registrar = new JPanel();
+        registrar.setLayout(new GridLayout(5, 2, 10, 10));
+        JTabbedPane pestañas = new JTabbedPane();
+        
         JLabel nombreLabel = new JLabel("Nombre:");
         nombreField = new JTextField();
         JLabel documentoLabel = new JLabel("Documento:");
@@ -42,20 +43,22 @@ public class CheckInGUI extends JFrame {
         checkInButton = new JButton("Check-In");
         statusLabel = new JLabel("");
 
+
         checkInButton.addActionListener(e -> realizarCheckIn());
 
-        panel.add(nombreLabel);
-        panel.add(nombreField);
-        panel.add(documentoLabel);
-        panel.add(documentoField);
-        panel.add(cursoLabel);
-        panel.add(cursoCombo);
-        panel.add(new JLabel()); // Espacio vacío
-        panel.add(checkInButton);
-        panel.add(new JLabel()); // Espacio vacío
-        panel.add(statusLabel);
+        registrar.add(nombreLabel);
+        registrar.add(nombreField);
+        registrar.add(documentoLabel);
+        registrar.add(documentoField);
+        registrar.add(cursoLabel);
+        registrar.add(cursoCombo);
+        registrar.add(new JLabel()); // Espacio vacío
+        registrar.add(checkInButton);
+        registrar.add(new JLabel()); // Espacio vacío
+        registrar.add(statusLabel);
 
-        add(panel);
+        pestañas.add("Registrar", registrar);
+        add(pestañas);
     }
 
     private void realizarCheckIn() {
