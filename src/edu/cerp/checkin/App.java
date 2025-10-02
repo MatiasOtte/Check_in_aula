@@ -5,7 +5,7 @@ import edu.cerp.checkin.logic.SesionService;
 
 public class App {
     public static void main(String[] args) {
-    boolean usarGui = false;
+    boolean usarGui = true;
     for (String a : args) if ("--gui".equalsIgnoreCase(a)) usarGui = true;
 
         SesionService service = new SesionService();

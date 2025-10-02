@@ -6,11 +6,11 @@ import edu.cerp.checkin.logic.SesionService;
 
 
 public class CheckInGUI extends JFrame {
-    private JButton checkInButton;
-    private JLabel statusLabel;
-    private JTextField nombreField;
-    private JTextField documentoField;
-    private JComboBox<String> cursoCombo;
+    private JButton regCheckInButton;
+    private JLabel regStatusLabel;
+    private JTextField regNombreField;
+    private JTextField regDocumentoField;
+    private JComboBox<String> regCursoCombo;
     private final SesionService sesionService;
 
     public CheckInGUI(SesionService sesionService) {
@@ -30,50 +30,56 @@ public class CheckInGUI extends JFrame {
     }
 
     private void initComponents() {
+        JPanel buscar = new JPanel();
         JPanel registrar = new JPanel();
+        JPanel listar = new JPanel();
+        JPanel resumir = new JPanel();
         registrar.setLayout(new GridLayout(5, 2, 10, 10));
         JTabbedPane pestañas = new JTabbedPane();
         
-        JLabel nombreLabel = new JLabel("Nombre:");
-        nombreField = new JTextField();
-        JLabel documentoLabel = new JLabel("Documento:");
-        documentoField = new JTextField();
-        JLabel cursoLabel = new JLabel("Curso:");
-        cursoCombo = new JComboBox<>(new String[] {"Prog 1", "Prog 2", "Base de Datos"});
-        checkInButton = new JButton("Check-In");
-        statusLabel = new JLabel("");
+        JLabel regNombreLabel = new JLabel("Nombre:");
+        regNombreField = new JTextField();
+        JLabel regDocumentoLabel = new JLabel("Documento:");
+        regDocumentoField = new JTextField();
+        JLabel regCursoLabel = new JLabel("Curso:");
+        regCursoCombo = new JComboBox<>(new String[] {"Prog 1", "Prog 2", "Base de Datos"});
+        regCheckInButton = new JButton("Check-In");
+        regStatusLabel = new JLabel("");
 
 
-        checkInButton.addActionListener(e -> realizarCheckIn());
+        regCheckInButton.addActionListener(e -> realizarCheckIn());
 
-        registrar.add(nombreLabel);
-        registrar.add(nombreField);
-        registrar.add(documentoLabel);
-        registrar.add(documentoField);
-        registrar.add(cursoLabel);
-        registrar.add(cursoCombo);
+        registrar.add(regNombreLabel);
+        registrar.add(regNombreField);
+        registrar.add(regDocumentoLabel);
+        registrar.add(regDocumentoField);
+        registrar.add(regCursoLabel);
+        registrar.add(regCursoCombo);
         registrar.add(new JLabel()); // Espacio vacío
-        registrar.add(checkInButton);
+        registrar.add(regCheckInButton);
         registrar.add(new JLabel()); // Espacio vacío
-        registrar.add(statusLabel);
+        registrar.add(regStatusLabel);
 
         pestañas.add("Registrar", registrar);
+        pestañas.add("Buscar", buscar);
+        pestañas.add("Listar", listar);
+        pestañas.add("Resumir", resumir);
         add(pestañas);
     }
 
     private void realizarCheckIn() {
-        String nombre = nombreField.getText();
-        String documento = documentoField.getText();
-        String curso = (String) cursoCombo.getSelectedItem();
+        String nombre = regNombreField.getText();
+        String documento = regDocumentoField.getText();
+        String curso = (String) regCursoCombo.getSelectedItem();
         if (nombre.isEmpty() || documento.isEmpty()) {
-            statusLabel.setText("Por favor, complete nombre y documento.");
+            regStatusLabel.setText("Por favor, complete nombre y documento.");
             return;
         }
         sesionService.registrar(nombre, documento, curso);
-        statusLabel.setText("Check-in realizado para: " + nombre + " (" + curso + ")");
-        nombreField.setText("");
-        documentoField.setText("");
-        cursoCombo.setSelectedIndex(0);
+        regStatusLabel.setText("Check-in realizado para: " + nombre + " (" + curso + ")");
+        regNombreField.setText("");
+        regDocumentoField.setText("");
+      regCursoCombo.setSelectedIndex(0);
     }
 
     // El método main se elimina porque la GUI se lanza desde App.java
